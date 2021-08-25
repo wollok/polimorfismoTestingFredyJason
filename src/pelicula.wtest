@@ -1,0 +1,81 @@
+import pelicula.*
+
+
+test "fredy asusta a juancito"{
+	fredy.cambiarVictima(juancito)
+	fredy.asustar()
+	assert.that(juancito.estaAsustado())
+}
+
+test "fredy asusta a susanita"{
+	fredy.cambiarVictima(susanita)
+	fredy.asustar()
+	assert.notThat(susanita.estaAsustado())
+}
+
+
+test "jason ataca a juancito lo mata"{
+	jason.atacar(juancito)
+	assert.that(juancito.seMurio())
+}
+
+test "jason ataca a susanita no le pasa nada"{
+	jason.atacar(susanita)
+	assert.notThat(susanita.seMurio())
+}
+
+test "jason potenciado ataca a fredy y le gana"{
+    jason.potenciar()
+	jason.atacar(fredy)
+    assert.that(jason.ganador())
+}
+
+test "jason fragil ataca a fredy y pierde"{
+
+	jason.atacar(fredy)
+    assert.notThat(jason.ganador())
+}
+
+
+test "jason ataca a tito y gana" {
+	
+	jason.atacar(tito)
+    assert.that(jason.ganador())
+	
+}
+
+test "fredy asusta a jason" {
+	
+	fredy.cambiarVictima(jason)
+	fredy.asustar()
+    assert.that(jason.estaAsustado())
+	
+}
+
+
+test "fredy asusta a juancito, sus pulsaciones aumentan y cuando lo ataca jason sobrevive" {
+	
+	fredy.cambiarVictima(juancito)
+	fredy.asustar()
+	jason.atacar(juancito)
+    assert.notThat(juancito.seMurio())
+	
+}
+
+test "juanito va al cementerio de dia, luego va al edificio abandonado y muere" {
+	
+	cementerio.saleElSol()
+	cementerio.llega(juancito)
+	edificioAbandonado.llega(juancito)
+	assert.that(juancito.seMurio())
+	
+}
+
+test "juanito va al cementerio de noche, aumentan tanto sus pulsaciones que luego va al edificio abandonado y sobrevive" {
+	
+	cementerio.sePoneElSol()
+	cementerio.llega(juancito)
+	edificioAbandonado.llega(juancito)
+	assert.notThat(juancito.seMurio())
+	
+}
